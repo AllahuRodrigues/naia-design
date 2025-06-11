@@ -16,7 +16,7 @@
     "@fontsource/inter": "^5.0.0",
     "@fontsource/space-grotesk": "^5.0.0",
     "@hookform/resolvers": "^2.9.11",
-    "@react-three/drei": "^9.85.0",
+    "@react-three/drei": "^9.88.0",
     "@react-three/fiber": "^8.15.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
@@ -32,7 +32,7 @@
     "react-router-dom": "^6.8.0",
     "styled-components": "^6.0.0",
     "tailwind-merge": "^2.0.0",
-    "three": "^0.158.0",
+    "three": "^0.159.0",
     "zod": "^3.20.6"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/styled-components": "^5.1.26",
-    "@types/three": "^0.158.0",
+    "@types/three": "^0.159.0",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "autoprefixer": "^10.4.14",
