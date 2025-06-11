@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+dist/
+.parcel-cache/
+
+# Python
+.venv/
+
+# macOS
+.DS_Store
+
+# Logs and environment
+*.log
+.env
+*.backup
