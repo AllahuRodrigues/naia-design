@@ -50,6 +50,16 @@ export default function HomePage() {
   const [captcha, setCaptcha] = useState('');
   const [form, setForm] = useState({ email: '', subject: '', message: '', captcha: '' });
 
+  // Parallax GSAP effect on section scroll
+  const sectionRefs = {
+    about: useRef<HTMLDivElement>(null),
+    commissioned: useRef<HTMLDivElement>(null),
+    portfolio: useRef<HTMLDivElement>(null),
+    other: useRef<HTMLDivElement>(null),
+    prints: useRef<HTMLDivElement>(null),
+    contact: useRef<HTMLDivElement>(null),
+  };
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       gsap.to(buttonsRef.current, {
@@ -62,6 +72,42 @@ export default function HomePage() {
         ease: 'sine.inOut',
         stagger: 0.2,
       });
+      Object.values(sectionRefs).forEach(ref => {
+        if (ref.current) {
+          gsap.set(ref.current, { opacity: 0, y: 60, scale: 0.98 });
+        }
+      });
+      const reveal = (ref: React.RefObject<HTMLDivElement>) => {
+        if (ref.current) {
+          gsap.to(ref.current, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+          });
+        }
+      };
+      // Intersection Observer for parallax reveal
+      const observers: IntersectionObserver[] = [];
+      Object.values(sectionRefs).forEach(ref => {
+        if (ref.current) {
+          const observer = new window.IntersectionObserver(
+            (entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  reveal(ref);
+                  observer.disconnect();
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          observer.observe(ref.current);
+          observers.push(observer);
+        }
+      });
+      return () => observers.forEach(o => o.disconnect());
     }
   }, []);
 
@@ -98,12 +144,24 @@ export default function HomePage() {
     }, 1000);
   };
 
-  // Scroll to section and close nav
-  const handleNavClick = (id: string) => {
+  // Scroll to section and close nav with react-scroll + GSAP parallax
+  const handleNavClick = (id: keyof typeof sectionRefs) => {
     setNavOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scroller.scrollTo(id, {
+      duration: 900,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      offset: -40,
+    });
+    // Optionally, trigger GSAP effect immediately (for fast nav)
+    if (sectionRefs[id].current) {
+      gsap.to(sectionRefs[id].current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.1,
+        ease: 'power3.out',
+      });
     }
   };
 
@@ -208,7 +266,7 @@ export default function HomePage() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="w-full max-w-4xl px-4 py-16 flex flex-col md:flex-row items-center gap-10 z-10 relative">
+      <section id="about" ref={sectionRefs.about} className="w-full max-w-4xl px-4 py-16 flex flex-col md:flex-row items-center gap-10 z-10 relative">
         <div className="flex-shrink-0">
           <Image src={mePaintingImage} alt="Retrato de Naia" width={260} height={340} className="rounded-2xl object-cover shadow-xl" />
         </div>
@@ -220,7 +278,7 @@ export default function HomePage() {
       </section>
 
       {/* Commissioned Works Section */}
-      <section id="commissioned" className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-5xl px-4 py-16 z-10 relative">
         <h2 className="text-3xl font-bold text-purple2 mb-8">Comissões</h2>
         <p className="text-base text-purple1 mb-8">Artes para capa que materializam histórias. Cada trabalho é meticulosamente criado para traduzir a essência e a visão do projeto.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -252,7 +310,7 @@ export default function HomePage() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-5xl px-4 py-16 z-10 relative">
         <h2 className="text-3xl font-bold text-magenta mb-8">Portfólio de Telas</h2>
         <p className="text-base text-white mb-8">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -312,7 +370,7 @@ export default function HomePage() {
       </section>
 
       {/* Other Works Section */}
-      <section id="other" className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="other" ref={sectionRefs.other} className="w-full max-w-5xl px-4 py-16 z-10 relative">
         <h2 className="text-3xl font-bold text-pink mb-8">Outros Trabalhos</h2>
         <p className="text-base text-purple1 mb-8">Projetos pessoais e trabalhos de arte digital que exploram diferentes temas, técnicas e expressões criativas para além do trabalho por encomenda.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -338,14 +396,14 @@ export default function HomePage() {
       </section>
 
       {/* Prints Section */}
-      <section id="prints" className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
+      <section id="prints" ref={sectionRefs.prints} className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
         <h2 className="text-3xl font-bold text-peach mb-8">Compre Prints</h2>
         <p className="text-base text-purple1 mb-6">Traga a arte da Naia para o seu espaço. Impressões de alta qualidade de pinturas originais e obras de arte digital, disponíveis através do nosso parceiro de confiança.</p>
         <a href="https://www.finemoz.co.mz/pt-pt/search?q=naia&options%5Bprefix%5D=last" target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border-2 border-peach px-8 py-3 text-peach hover:bg-peach hover:text-purple3 transition-colors font-bold text-lg">Comprar na FineMoz</a>
       </section>
 
       {/* Contact Section (with form) */}
-      <section id="contact" className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
+      <section id="contact" ref={sectionRefs.contact} className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
         <h2 className="text-3xl font-bold text-white mb-8">Interessado em trabalhar comigo?</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center max-w-lg mx-auto mb-8">
           <input
