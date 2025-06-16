@@ -340,34 +340,34 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center">
             <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Ecos da mente / Echoes of the mind</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Ecos da mente / Echoes of the mind (2024)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 50x70cm</span>
             <span className="text-xs text-neutral-100">Esta é a minha tentativa de traduzir o fluxo de pensamentos e sensações num código visual. Cada traço e símbolo representa uma ideia ou emoção, construindo um mapa abstrato da minha própria mente. Uma janela para o subconsciente, convidando o observador a decifrar os seus próprios ecos.</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon (2022)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 30x36cm</span>
             <span className="text-xs text-neutral-100">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1 (2024)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2 (2024)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it?</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it? (2022)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">33.3</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">33.3 (2022)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm</span>
             <span className="text-xs text-neutral-100">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
           </div>
