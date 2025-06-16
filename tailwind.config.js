@@ -16,7 +16,9 @@ module.exports = {
       },
       fontFamily: {
         helvetica: ['Helvetica Neue', 'Arial', 'sans-serif'],
-        spacemono: ['Space Mono', 'monospace']
+        spacemono: ['Space Mono', 'monospace'],
+        inter: ['Inter', 'sans-serif'],
+        styleScript: ['Style Script', 'cursive'],
       }
     },
   },

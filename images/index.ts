@@ -4,7 +4,7 @@ import mePaintingUrl from './about/me-painting.jpg';
 
 export const logoImage = logoUrl;
 export const mePaintingImage = mePaintingUrl;
-
+// metamorfoseUrl
 // Paintings
 import karinganaUrl from './paintings/karingana-wa-karingana-2025.jpeg';
 import theDisconnectUrl from './paintings/the-disconnect-2024.jpg';
@@ -12,7 +12,8 @@ import quadroNaoTitulado2025Url from './paintings/quadro-nao-titulado-2025.jpg';
 import quadroNaoTitulado2021Url from './paintings/quadro-nao-titulado-2021.jpg';
 import ecosDaMenteUrl from './paintings/ecos-da-mente-2024.png';
 import therapySessionUrl from './paintings/a-therapy-session with-poseidon-2022.jpg';
-import metamorfoseUrl from './paintings/metamorfose-2-2024.jpg';
+import metamorfose1Url from './paintings/MetaMORFOSE-1-2024.jpg';
+import metamorfose2Url from './paintings/metamorfose-2-2024.jpg';
 import canYouSeeItUrl from './paintings/can-you-see-it-2021.jpg';
 import treeTresTresUrl from './paintings/333-2022.jpg';
 
@@ -22,7 +23,8 @@ export const quadroNaoTitulado2025Image = quadroNaoTitulado2025Url;
 export const quadroNaoTitulado2021Image = quadroNaoTitulado2021Url;
 export const ecosDaMenteImage = ecosDaMenteUrl;
 export const therapySessionImage = therapySessionUrl;
-export const metamorfoseImage = metamorfoseUrl;
+export const metamorfose1Image = metamorfose1Url;
+export const metamorfose2Image = metamorfose2Url;
 export const canYouSeeItImage = canYouSeeItUrl;
 export const treeTresTresImage = treeTresTresUrl;
 

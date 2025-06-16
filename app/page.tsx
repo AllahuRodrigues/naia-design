@@ -14,7 +14,8 @@ import {
   quadroNaoTitulado2021Image,
   ecosDaMenteImage,
   therapySessionImage,
-  metamorfoseImage,
+  metamorfose1Image,
+  metamorfose2Image,
   canYouSeeItImage,
   treeTresTresImage,
   // Commissioned
@@ -34,7 +35,6 @@ import { scroller } from 'react-scroll';
 const flyingButtons = [
   { text: 'PRINTS', color: 'border-purple1 text-purple1 bg-transparent' },
   { text: 'PINTURA', color: 'border-purple1 text-purple1 bg-purple1 text-purple3' },
-  { text: 'CAPA', color: 'border-purple2 text-purple2 bg-transparent' },
   { text: 'ARTE DIGITAL', color: 'border-magenta text-magenta bg-transparent' },
   { text: 'VISUAL ARTIST', color: 'border-purple1 text-purple3 bg-purple1' },
   { text: 'EXPOSIÇÕES', color: 'border-purple1 text-purple1 bg-transparent' },
@@ -177,7 +177,7 @@ export default function HomePage() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-4">
           <button onClick={() => handleNavClick('about')} className="rounded-full border-2 border-purple1 px-6 py-2 text-purple1 hover:bg-purple1 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Sobre mim">Sobre mim</button>
-          <button onClick={() => handleNavClick('commissioned')} className="rounded-full border-2 border-purple2 px-6 py-2 text-purple2 hover:bg-purple2 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Comissões">Comissões</button>
+          <button onClick={() => handleNavClick('commissioned')} className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-purple2 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Comissões">Comissões</button>
           <button onClick={() => handleNavClick('portfolio')} className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Portfólio">Portfólio</button>
           <button onClick={() => handleNavClick('other')} className="rounded-full border-2 border-pink px-6 py-2 text-pink hover:bg-pink hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Outros Trabalhos">Outros Trabalhos</button>
           <button onClick={() => handleNavClick('prints')} className="rounded-full border-2 border-peach px-6 py-2 text-peach hover:bg-peach hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Compre Prints">Compre Prints</button>
@@ -271,7 +271,7 @@ export default function HomePage() {
           <Image src={mePaintingImage} alt="Retrato de Naia" width={260} height={340} className="rounded-2xl object-cover shadow-xl" />
         </div>
         <div>
-          <h2 className="text-3xl font-bold text-purple1 mb-4">Sobre mim</h2>
+          <h2 className="text-4xl font-styleScript font-inter text-purple1 mb-4">Sobre mim</h2>
           <p className="text-lg text-white mb-2 italic">Naia é uma artista visual que explora a condição humana. O seu trabalho é eclético e simbólico, misturando semi-realismo e abstracionismo para apresentar narrativas que procuram conectar e motivar.<br />"A arte é como eu expresso o que está na minha mente quando as palavras falham."</p>
           <p className="text-base text-purple1 mt-6">O meu nome é Naia, sou uma artista autodidata, nascida e criada em Moçambique, e atualmente baseada em Portugal. Desde sempre fui atraída pelo lápis e pelo papel, seja para tentar desenhar a minha boneca favorita ou para rabiscar nas paredes. À medida que cresci, segui o caminho da arte tradicional e pratiquei-a até sentir a necessidade de tomar as minhas próprias liberdades com o meu trabalho, ter ideias e conseguir colocá-las no papel sem problemas. Até hoje, o meu ambiente ainda é um grande fator contribuinte para a arte que crio, mas atualmente os meus meios são acrílico sobre tela e arte digital. Tenho grande interesse e inspiração nas obras do Renascimento e do movimento abstracionista, por isso, certamente encontrará uma semelhança disso no meu trabalho. Sinto a necessidade de misturar os dois. Nesta busca, o meu trabalho pode tomar rumos inesperados, mas não menos frutíferos. O aspeto da narrativa na arte é algo que está sempre muito presente no meu trabalho, seja ficcional ou não, e a história não termina com a atração principal da obra; a história é enriquecida por detalhes simbólicos que amplificam a narrativa e ajudam a transmitir a mensagem. O meu trabalho é motivacional e introspectivo e, com a ajuda de cores vibrantes e uma mistura de estilos, espero cumprir o objetivo de evocar emoção no meu público.</p>
         </div>
@@ -279,20 +279,20 @@ export default function HomePage() {
 
       {/* Commissioned Works Section */}
       <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-5xl px-4 py-16 z-10 relative">
-        <h2 className="text-3xl font-bold text-purple2 mb-8">Comissões</h2>
+        <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Comissões</h2>
         <p className="text-base text-purple1 mb-8">Artes para capa que materializam histórias. Cada trabalho é meticulosamente criado para traduzir a essência e a visão do projeto.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
             <Image src={hocusPocusImage} alt="Hocus Pocus The Guy" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Hocus Pocus The Guy</span>
+            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Hocus Pocus</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={sinestesiaTheGuyImage} alt="Sinestesia The Guy" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Sinestesia The Guy</span>
+            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Sinestesia</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={bossCunaCoverartImage} alt="Boss Cuna" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Boss Cuna</span>
+            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Segredos de um Poeta</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={potestadeFinalImage} alt="Potestade" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
@@ -300,18 +300,18 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center">
             <Image src={lazuliJhayImage} alt="Lazuli Jhay" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Lazuli Jhay</span>
+            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Lazuli</span>
           </div>
           <div className="flex flex-col items-center">
-            <Image src={teen177Image} alt="Teen 177" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Teen 177</span>
+            <Image src={teen177Image} alt="Teen 17" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+            <span className="mt-2 text-purple1 font-spacemono text-sm italic">Teen 17</span>
           </div>
         </div>
       </section>
 
       {/* Portfolio Section */}
       <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-5xl px-4 py-16 z-10 relative">
-        <h2 className="text-3xl font-bold text-magenta mb-8">Portfólio de Telas</h2>
+        <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Portfólio de Telas</h2>
         <p className="text-base text-white mb-8">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
@@ -328,13 +328,13 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center">
             <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado (2025)</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2025)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 40x50cm</span>
             <span className="text-xs text-neutral-100">Este quadro desvenda um diálogo íntimo com o eu. A dança entre o azul e o amarelo não é apenas uma escolha cromática, mas a linguagem que uso para explorar as dualidades e a essência da minha própria existência.</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado (2021)</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2021)</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 50x50cm</span>
             <span className="text-xs text-neutral-100">Nesta obra exploro a conexão com a ancestralidade e a essência do ser. As texturas orgânicas e os contrastes visuais convidam a uma profunda reflexão sobre o que nos une e nos diferencia.</span>
           </div>
@@ -346,18 +346,23 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center">
             <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 30x36cm</span>
             <span className="text-xs text-neutral-100">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
           </div>
           <div className="flex flex-col items-center">
-            <Image src={metamorfoseImage} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto)</span>
+            <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1</span>
+            <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
           </div>
           <div className="flex flex-col items-center">
             <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
-            <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo?</span>
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it?</span>
             <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm</span>
           </div>
           <div className="flex flex-col items-center">
@@ -371,7 +376,7 @@ export default function HomePage() {
 
       {/* Other Works Section */}
       <section id="other" ref={sectionRefs.other} className="w-full max-w-5xl px-4 py-16 z-10 relative">
-        <h2 className="text-3xl font-bold text-pink mb-8">Outros Trabalhos</h2>
+        <h2 className="text-4xl font-styleScript font-inter text-pink mb-8">Outros Trabalhos</h2>
         <p className="text-base text-purple1 mb-8">Projetos pessoais e trabalhos de arte digital que exploram diferentes temas, técnicas e expressões criativas para além do trabalho por encomenda.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
@@ -397,7 +402,7 @@ export default function HomePage() {
 
       {/* Prints Section */}
       <section id="prints" ref={sectionRefs.prints} className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
-        <h2 className="text-3xl font-bold text-peach mb-8">Compre Prints</h2>
+        <h2 className="text-4xl font-styleScript font-inter text-peach mb-8">Compre Prints</h2>
         <p className="text-base text-purple1 mb-6">Traga a arte da Naia para o seu espaço. Impressões de alta qualidade de pinturas originais e obras de arte digital, disponíveis através do nosso parceiro de confiança.</p>
         <a href="https://www.finemoz.co.mz/pt-pt/search?q=naia&options%5Bprefix%5D=last" target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border-2 border-peach px-8 py-3 text-peach hover:bg-peach hover:text-purple3 transition-colors font-bold text-lg">Comprar na FineMoz</a>
       </section>
@@ -480,7 +485,7 @@ export default function HomePage() {
           <span className="text-purple1">Contacte-me também em:</span>
           <div className="flex gap-4 mt-2">
             <a href="https://www.instagram.com/naia.dot/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full border-2 border-purple1 px-4 py-2 text-purple1 hover:bg-purple1 hover:text-purple3 transition-colors">Instagram</a>
-            <a href="https://www.behance.net/shanaiasousa" target="_blank" rel="noopener noreferrer" aria-label="Behance" className="rounded-full border-2 border-purple2 px-4 py-2 text-purple2 hover:bg-purple2 hover:text-purple3 transition-colors">Behance</a>
+            <a href="https://www.behance.net/shanaiasousa" target="_blank" rel="noopener noreferrer" aria-label="Behance" className="rounded-full border-2 border-purple1 px-4 py-2 text-purple1 hover:bg-purple1 hover:text-purple3 transition-colors">Behance</a>
             <a href="https://www.tiktok.com/@naiadotcom" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="rounded-full border-2 border-pink px-4 py-2 text-pink hover:bg-pink hover:text-purple3 transition-colors">TikTok</a>
             <a href="mailto:naia.visua7s@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email" className="rounded-full border-2 border-pink px-4 py-2 text-pink hover:bg-pink hover:text-purple3 transition-colors">Email</a>
           </div>
