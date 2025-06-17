@@ -36,7 +36,7 @@ const flyingButtons = [
   { text: 'PRINTS', color: 'border-purple1 text-purple1 bg-transparent' },
   { text: 'PINTURA', color: 'border-purple1 text-purple1 bg-purple1 text-purple3' },
   { text: 'ARTE DIGITAL', color: 'border-magenta text-magenta bg-transparent' },
-  { text: 'VISUAL ARTIST', color: 'border-purple1 text-purple3 bg-purple1' },
+  { text: 'ARTISTA VISUAL', color: 'border-purple1 text-purple3 bg-purple1' },
   { text: 'EXPOSIÇÕES', color: 'border-purple1 text-purple1 bg-transparent' },
   { text: 'PORTFÓLIO', color: 'border-pink text-pink bg-transparent' },
 ];
