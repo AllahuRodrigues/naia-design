@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import {
   logoImage,
   mePaintingImage,
+  poseidonImage,
   // Paintings
   karinganaImage,
   theDisconnectImage,
@@ -78,6 +79,18 @@ export default function HomePage() {
           gsap.set(ref.current, { opacity: 0, y: 60, scale: 0.98 });
         }
       });
+      
+      // Fallback for mobile devices - ensure sections are visible
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setTimeout(() => {
+          Object.values(sectionRefs).forEach(ref => {
+            if (ref.current && gsap.getProperty(ref.current, "opacity") === 0) {
+              gsap.set(ref.current, { opacity: 1, y: 0, scale: 1 });
+            }
+          });
+        }, 1000);
+      }
       const reveal = (ref: React.RefObject<HTMLDivElement>) => {
         if (ref.current) {
           gsap.to(ref.current, {
@@ -102,7 +115,7 @@ export default function HomePage() {
                 }
               });
             },
-            { threshold: 0.2 }
+            { threshold: window.innerWidth < 768 ? 0.1 : 0.2 }
           );
           observer.observe(ref.current);
           observers.push(observer);
@@ -253,6 +266,18 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center py-20 pt-24 w-full z-10 relative mt-16">
+        {/* Poseidon Hero Image */}
+        <div className="mb-8 w-full">
+          <Image 
+            src={poseidonImage} 
+            alt="Poseidon - Main artwork by Naia" 
+            width={1200} 
+            height={600} 
+            className="w-full h-64 md:h-80 lg:h-96 xl:h-[28rem] object-contain" 
+            priority 
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
         <h1 className="text-[3.5rem] md:text-[6rem] font-bold text-purple1 text-center leading-none mb-4" style={{letterSpacing: '-0.04em'}}>NAIA SOUSA</h1>
         <div className="text-center text-lg text-purple1 mb-2 font-spacemono">
           <span className="block">Shanaia de Sousa</span>
@@ -311,7 +336,7 @@ export default function HomePage() {
       {/* About Me Section */}
       <section id="about" ref={sectionRefs.about} className="w-full max-w-4xl px-6 py-20 flex flex-col md:flex-row items-center gap-10 z-10 relative">
         <div className="flex-shrink-0">
-          <Image src={mePaintingImage} alt="Retrato de Naia" width={260} height={340} className="rounded-2xl object-cover shadow-xl" />
+          <Image src={mePaintingImage} alt="Retrato de Naia" width={260} height={340} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-2xl object-contain shadow-xl bg-purple3/10" />
         </div>
         <div>
           <h2 className="text-4xl font-styleScript font-inter text-purple1 mb-4">Sobre mim</h2>
@@ -321,95 +346,95 @@ export default function HomePage() {
       </section>
 
       {/* Commissioned Works Section */}
-      <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-5xl px-6 py-20 z-10 relative">
+      <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-7xl px-6 py-20 z-10 relative">
         <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Comissões</h2>
         <p className="text-base text-purple1 mb-8">Artes para capa que materializam histórias. Cada trabalho é meticulosamente criado para traduzir a essência e a visão do projeto.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={hocusPocusImage} alt="Hocus Pocus The Guy" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="flex flex-col items-center w-full">
+            <Image src={hocusPocusImage} alt="Hocus Pocus The Guy" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Hocus Pocus</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={sinestesiaTheGuyImage} alt="Sinestesia The Guy" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={sinestesiaTheGuyImage} alt="Sinestesia The Guy" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Sinestesia</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={bossCunaCoverartImage} alt="Boss Cuna" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={bossCunaCoverartImage} alt="Boss Cuna" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Segredos de um Poeta</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={potestadeFinalImage} alt="Potestade" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={potestadeFinalImage} alt="Potestade" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Potestade</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={lazuliJhayImage} alt="Lazuli Jhay" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={lazuliJhayImage} alt="Lazuli Jhay" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Lazuli</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={teen177Image} alt="Teen 17" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={teen177Image} alt="Teen 17" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Teen 17</span>
           </div>
         </div>
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-5xl px-6 py-20 z-10 relative">
-        <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Portfólio de Telas</h2>
-        <p className="text-base text-black mb-8">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 w-full">
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={karinganaImage} alt="Karingana wa karingana" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" priority />
+      <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-7xl px-4 py-20 z-10 relative">
+        <h2 className="text-3xl md:text-4xl font-styleScript font-inter text-magenta mb-6 text-center">Portfólio de Telas</h2>
+        <p className="text-base text-black mb-12 text-center max-w-3xl mx-auto">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 w-full">
+          <div className="flex flex-col items-center w-full">
+            <Image src={karinganaImage} alt="Karingana wa karingana" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" priority />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Karingana wa karingana / Era uma vez (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 70x50cm</span>
             <span className="text-xs text-black">Esta obra foca-se em representar a identidade africana e a cultura africana. Com o uso de cores vibrantes e figuras excêntricas explorei o quão vasto este tema é, tentando trazer ao de cima o coração disto tudo.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={theDisconnectImage} alt="A desconexão" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={theDisconnectImage} alt="A desconexão" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">A desconexão / The disconnect (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm </span>
             <span className="text-xs text-black">Neste conjunto de quadros explorei a desconexão entre as pessoas em comunidade. O porquê de não perpetuarmos um ciclo de amor mas sim quase sempre um ciclo de ódio.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 40x50cm</span>
             <span className="text-xs text-black">Este quadro desvenda um diálogo íntimo com o eu. A dança entre o azul e o amarelo não é apenas uma escolha cromática, mas a linguagem que uso para explorar as dualidades e a essência da minha própria existência.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2021)</span>
             <span className="text-xs text-black">Acrílico em tela - 50x50cm</span>
             <span className="text-xs text-black">Nesta obra exploro a conexão com a ancestralidade e a essência do ser. As texturas orgânicas e os contrastes visuais convidam a uma profunda reflexão sobre o que nos une e nos diferencia.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Ecos da mente / Echoes of the mind (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 50x70cm</span>
             <span className="text-xs text-black">Esta é a minha tentativa de traduzir o fluxo de pensamentos e sensações num código visual. Cada traço e símbolo representa uma ideia ou emoção, construindo um mapa abstrato da minha própria mente. Uma janela para o subconsciente, convidando o observador a decifrar os seus próprios ecos.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 30x36cm</span>
             <span className="text-xs text-black">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1 (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2 (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it? (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">33.3 (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
             <span className="text-xs text-black">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
@@ -418,24 +443,24 @@ export default function HomePage() {
       </section>
 
       {/* Other Works Section */}
-      <section id="other" ref={sectionRefs.other} className="w-full max-w-5xl px-6 py-20 z-10 relative">
+      <section id="other" ref={sectionRefs.other} className="w-full max-w-7xl px-6 py-20 z-10 relative">
         <h2 className="text-4xl font-styleScript font-inter text-pink mb-8">Outros Trabalhos</h2>
         <p className="text-base text-purple1 mb-8">Projetos pessoais e trabalhos de arte digital que exploram diferentes temas, técnicas e expressões criativas para além do trabalho por encomenda.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={lacosEternosImage} alt="Laços eternos" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="flex flex-col items-center w-full">
+            <Image src={lacosEternosImage} alt="Laços eternos" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Laços eternos / Eternal bonds (2023)</span>
             <span className="text-xs text-black">Arte digital</span>
             <span className="text-xs text-neutral-700">Pintura digital inspirada no poema intitulado "Silogismos" de Ana Luísa Amaral. Explorei o sentimento de amor maternal, a vontade de passar uma eternidade uma com a outra.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={breakingOutImage} alt="O despertar" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={breakingOutImage} alt="O despertar" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">O despertar / Breaking out (2024)</span>
             <span className="text-xs text-black">Arte digital</span>
             <span className="text-xs text-neutral-700">É um desafio ser você mesmo numa sociedade que ainda não o/a compreende, mas a sua autenticidade é certamente contagiosa e inspiradora, e, com o tempo, você inspirará mudança neles também.</span>
           </div>
-          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-            <Image src={amorFatiImage} alt="Amor fati" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full">
+            <Image src={amorFatiImage} alt="Amor fati" width={320} height={320} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Amor fati (2024)</span>
             <span className="text-xs text-black">Arte digital</span>
             <span className="text-xs text-neutral-700">Obra baseada na crença com raízes estoicas que defende que Abraçar o emaranhado da existência com todo o coração.</span>

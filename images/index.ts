@@ -2,8 +2,12 @@
 import logoUrl from './about/logo.png';
 import mePaintingUrl from './about/me-painting.jpg';
 
+// Background images
+import poseidonUrl from './background/Poseidon.jpg';
+
 export const logoImage = logoUrl;
 export const mePaintingImage = mePaintingUrl;
+export const poseidonImage = poseidonUrl;
 // metamorfoseUrl
 // Paintings
 import karinganaUrl from './paintings/karingana-wa-karingana-2025.jpeg';
