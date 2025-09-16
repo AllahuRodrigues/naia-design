@@ -33,18 +33,19 @@ import {
 import { scroller } from 'react-scroll';
 
 const flyingButtons = [
-  { text: 'PRINTS', color: 'border-purple1 text-purple1 bg-transparent' },
-  { text: 'PINTURA', color: 'border-purple1 text-purple1 bg-purple1 text-purple3' },
-  { text: 'ARTE DIGITAL', color: 'border-magenta text-magenta bg-transparent' },
-  { text: 'ARTISTA VISUAL', color: 'border-purple1 text-purple3 bg-purple1' },
-  { text: 'EXPOSIÇÕES', color: 'border-purple1 text-purple1 bg-transparent' },
-  { text: 'PORTFÓLIO', color: 'border-pink text-pink bg-transparent' },
+  { text: 'PRINTS', color: 'border-purple1 text-purple1 bg-transparent shadow-lg' },
+  { text: 'PINTURA', color: 'border-purple1 text-purple3 bg-purple1 shadow-lg' },
+  { text: 'ARTE DIGITAL', color: 'border-magenta text-magenta bg-transparent shadow-lg' },
+  { text: 'ARTISTA VISUAL', color: 'border-purple1 text-purple3 bg-purple1 shadow-lg' },
+  { text: 'EXPOSIÇÕES', color: 'border-purple1 text-purple1 bg-transparent shadow-lg' },
+  { text: 'PORTFÓLIO', color: 'border-pink text-pink bg-transparent shadow-lg' },
 ];
 
 export default function HomePage() {
   const buttonsRef = useRef<(HTMLDivElement | null)[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
   const [navOpen, setNavOpen] = useState(false);
+  const [trabalhosOpen, setTrabalhosOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
   const [captcha, setCaptcha] = useState('');
@@ -63,14 +64,14 @@ export default function HomePage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       gsap.to(buttonsRef.current, {
-        y: 'random(-30, 30)',
-        x: 'random(-40, 40)',
-        rotate: 'random(-10, 10)',
-        duration: 3,
+        y: 'random(-50, 50)',
+        x: 'random(-60, 60)',
+        rotate: 'random(-15, 15)',
+        duration: 0.8,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
-        stagger: 0.2,
+        ease: 'power2.inOut',
+        stagger: 0.05,
       });
       Object.values(sectionRefs).forEach(ref => {
         if (ref.current) {
@@ -170,24 +171,41 @@ export default function HomePage() {
       {/* Grainy background overlay */}
       <div className="pointer-events-none fixed inset-0 z-0" style={{background: 'url(/images/grain-img.avif), #262254', opacity: 0.25, mixBlendMode: 'overlay'}} aria-hidden="true" />
       {/* Header & Navigation */}
-      <header className="w-full flex justify-between items-center px-4 md:px-8 py-6 z-10 relative">
+      <header className="w-full flex justify-between items-center px-4 md:px-8 py-4 z-[100000] fixed top-0 left-0 right-0 bg-purple3 shadow-lg">
         <div className="flex items-center gap-2">
           <Image src={logoImage} alt="Logo Naia" width={60} height={60} priority />
         </div>
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-4">
+        <nav className="hidden md:flex gap-4 items-center">
           <button onClick={() => handleNavClick('about')} className="rounded-full border-2 border-purple1 px-6 py-2 text-purple1 hover:bg-purple1 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Sobre mim">Sobre mim</button>
-          <button onClick={() => handleNavClick('commissioned')} className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-purple2 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Comissões">Comissões</button>
-          <button onClick={() => handleNavClick('portfolio')} className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Portfólio">Portfólio</button>
-          <button onClick={() => handleNavClick('other')} className="rounded-full border-2 border-pink px-6 py-2 text-pink hover:bg-pink hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Outros Trabalhos">Outros Trabalhos</button>
-          <button onClick={() => handleNavClick('prints')} className="rounded-full border-2 border-peach px-6 py-2 text-peach hover:bg-peach hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Compre Prints">Compre Prints</button>
+          <div className="relative">
+            <button 
+              onClick={() => setTrabalhosOpen(!trabalhosOpen)} 
+              className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-base flex items-center gap-2" 
+              tabIndex={0} 
+              aria-label="Trabalhos"
+            >
+              Trabalhos
+              <svg className={`w-4 h-4 transition-transform ${trabalhosOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {trabalhosOpen && (
+              <div className="absolute top-full mt-2 left-0 bg-purple2 border-2 border-magenta rounded-xl shadow-xl flex flex-col gap-2 p-4 z-50 min-w-[200px]">
+                <button onClick={() => { handleNavClick('portfolio'); setTrabalhosOpen(false); }} className="rounded-full border-2 border-magenta px-4 py-2 text-magenta bg-purple3 hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-sm text-left">Portfólio de Telas</button>
+                <button onClick={() => { handleNavClick('commissioned'); setTrabalhosOpen(false); }} className="rounded-full border-2 border-magenta px-4 py-2 text-magenta bg-purple3 hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-sm text-left">Comissões</button>
+                <button onClick={() => { handleNavClick('other'); setTrabalhosOpen(false); }} className="rounded-full border-2 border-pink px-4 py-2 text-pink bg-purple3 hover:bg-pink hover:text-purple3 transition-colors font-spacemono text-sm text-left">Outros Trabalhos</button>
+              </div>
+            )}
+          </div>
+          <button onClick={() => handleNavClick('prints')} className="rounded-full border-2 border-magenta px-6 py-2 text-magenta hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Compre Prints">Compre Prints</button>
           <button onClick={() => handleNavClick('contact')} className="rounded-full border-2 border-white px-6 py-2 text-white hover:bg-white hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Contato">
             <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 8.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v10.5A2.25 2.25 0 005.25 19.5h13.5A2.25 2.25 0 0021 17.25v-1.5M16.5 12l-4.5 4.5m0 0l-4.5-4.5m4.5 4.5V6" /></svg>
           </button>
         </nav>
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full border-2 border-purple1 text-purple1 focus:outline-none focus:ring-2 focus:ring-purple1"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-full border-2 border-purple1 text-purple1 focus:outline-none active:scale-95 transition-transform"
           aria-label="Abrir menu"
           onClick={() => setNavOpen(!navOpen)}
         >
@@ -197,36 +215,61 @@ export default function HomePage() {
         </button>
         {/* Mobile Nav Drawer */}
         {navOpen && (
-          <nav className="md:hidden absolute top-full right-4 bg-purple2/95 border-2 border-purple1 rounded-xl shadow-lg flex flex-col gap-2 p-4 z-50 animate-fade-in">
-            <button onClick={() => handleNavClick('about')} className="rounded-full border-2 border-purple1 px-4 py-2 text-purple1 bg-purple3 hover:bg-purple1 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Sobre mim">Sobre mim</button>
-            <button onClick={() => handleNavClick('commissioned')} className="rounded-full border-2 border-purple2 px-4 py-2 text-purple2 bg-purple3 hover:bg-purple2 hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Comissões">Comissões</button>
-            <button onClick={() => handleNavClick('portfolio')} className="rounded-full border-2 border-magenta px-4 py-2 text-magenta bg-purple3 hover:bg-magenta hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Portfólio">Portfólio</button>
-            <button onClick={() => handleNavClick('other')} className="rounded-full border-2 border-pink px-4 py-2 text-pink bg-purple3 hover:bg-pink hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Outros Trabalhos">Outros Trabalhos</button>
-            <button onClick={() => handleNavClick('prints')} className="rounded-full border-2 border-peach px-4 py-2 text-peach bg-purple3 hover:bg-peach hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Compre Prints">Compre Prints</button>
-            <button onClick={() => handleNavClick('contact')} className="rounded-full border-2 border-white px-4 py-2 text-white bg-purple3 hover:bg-white hover:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Contato">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 8.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v10.5A2.25 2.25 0 005.25 19.5h13.5A2.25 2.25 0 0021 17.25v-1.5M16.5 12l-4.5 4.5m0 0l-4.5-4.5m4.5 4.5V6" /></svg>
+          <>
+            <div className="md:hidden fixed inset-0 bg-black/50 z-[99998]" onClick={() => setNavOpen(false)}></div>
+            <nav className="md:hidden fixed top-16 right-4 left-4 bg-purple2 border-2 border-purple1 rounded-xl shadow-xl flex flex-col gap-3 p-6 z-[99999] animate-fade-in max-w-sm mx-auto">
+            <button onClick={() => { handleNavClick('about'); setNavOpen(false); }} className="rounded-full border-2 border-purple1 px-6 py-3 text-purple1 bg-purple3 active:bg-purple1 active:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Sobre mim">Sobre mim</button>
+            
+            <div className="relative">
+              <button 
+                onClick={() => setTrabalhosOpen(!trabalhosOpen)} 
+                className="w-full rounded-full border-2 border-magenta px-6 py-3 text-magenta bg-purple3 active:bg-magenta active:text-purple3 transition-colors font-spacemono text-base flex items-center justify-between" 
+                tabIndex={0} 
+                aria-label="Trabalhos"
+              >
+                Trabalhos
+                <svg className={`w-4 h-4 transition-transform ${trabalhosOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {trabalhosOpen && (
+                <div className="mt-2 ml-4 flex flex-col gap-2">
+                  <button onClick={() => { handleNavClick('portfolio'); setNavOpen(false); setTrabalhosOpen(false); }} className="rounded-full border-2 border-magenta px-4 py-2 text-magenta bg-purple3/50 active:bg-magenta active:text-purple3 transition-colors font-spacemono text-sm text-left">• Portfólio de Telas</button>
+                  <button onClick={() => { handleNavClick('commissioned'); setNavOpen(false); setTrabalhosOpen(false); }} className="rounded-full border-2 border-magenta px-4 py-2 text-magenta bg-purple3/50 active:bg-magenta active:text-purple3 transition-colors font-spacemono text-sm text-left">• Comissões</button>
+                  <button onClick={() => { handleNavClick('other'); setNavOpen(false); setTrabalhosOpen(false); }} className="rounded-full border-2 border-pink px-4 py-2 text-pink bg-purple3/50 active:bg-pink active:text-purple3 transition-colors font-spacemono text-sm text-left">• Outros Trabalhos</button>
+                </div>
+              )}
+            </div>
+            
+            <button onClick={() => { handleNavClick('prints'); setNavOpen(false); }} className="rounded-full border-2 border-magenta px-6 py-3 text-magenta bg-purple3 active:bg-magenta active:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Compre Prints">Compre Prints</button>
+            <button onClick={() => { handleNavClick('contact'); setNavOpen(false); }} className="rounded-full border-2 border-white px-6 py-3 text-white bg-purple3 active:bg-white active:text-purple3 transition-colors font-spacemono text-base" tabIndex={0} aria-label="Contato">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle mr-2"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 8.25V6.75A2.25 2.25 0 0018.75 4.5H5.25A2.25 2.25 0 003 6.75v10.5A2.25 2.25 0 005.25 19.5h13.5A2.25 2.25 0 0021 17.25v-1.5M16.5 12l-4.5 4.5m0 0l-4.5-4.5m4.5 4.5V6" /></svg>
+              Contato
             </button>
           </nav>
+          </>
         )}
       </header>
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center py-20 w-full z-10 relative">
-        <h1 className="text-[3.5rem] md:text-[6rem] font-bold text-purple1 text-center leading-none mb-4" style={{letterSpacing: '-0.04em'}}>PORTFOLIO<br />WEBSITE</h1>
+      <section className="flex flex-col items-center justify-center py-20 pt-24 w-full z-10 relative mt-16">
+        <h1 className="text-[3.5rem] md:text-[6rem] font-bold text-purple1 text-center leading-none mb-4" style={{letterSpacing: '-0.04em'}}>NAIA SOUSA</h1>
         <div className="text-center text-lg text-purple1 mb-2 font-spacemono">
           <span className="block">Shanaia de Sousa</span>
           <span className="block">Artista Visual</span>
           <span className="block">Porto, Portugal</span>
 
         </div>
-        <div className="relative flex flex-wrap justify-center gap-4 mt-8 mb-4 w-full max-w-3xl">
+        <div className="relative flex flex-wrap justify-center gap-4 mt-8 mb-4 w-full max-w-3xl px-4">
           {flyingButtons.map((btn, i) => (
             <div
               key={btn.text}
               ref={el => { buttonsRef.current[i] = el!; }}
-              className={`rounded-full border-2 px-8 py-3 font-spacemono text-lg shadow-lg cursor-pointer select-none transition-colors ${btn.color}`}
-              tabIndex={0}
-              aria-label={btn.text}
+              className={`rounded-full border-4 border-dashed px-6 py-2 md:px-8 md:py-3 font-spacemono text-sm md:text-lg shadow-xl cursor-default select-none transform-gpu pointer-events-none ${btn.color}`}
+              style={{
+                transform: 'rotate(-2deg)',
+                filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.3))',
+              }}
             >
               {btn.text}
             </div>
@@ -235,7 +278,7 @@ export default function HomePage() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="w-full max-w-4xl px-4 py-12 z-10 relative flex flex-col items-center">
+      <section id="skills" className="w-full max-w-4xl px-6 py-16 z-10 relative flex flex-col items-center">
         <h2 className="text-3xl font-bold text-purple1 mb-8">Skills</h2>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex flex-col gap-4">
@@ -253,8 +296,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="rounded-xl bg-peach/80 p-4 flex items-center gap-3 shadow-md">
-              <span className="inline-block w-3 h-3 rounded-full bg-peach"></span>
+            <div className="rounded-xl bg-magenta/80 p-4 flex items-center gap-3 shadow-md">
+              <span className="inline-block w-3 h-3 rounded-full bg-magenta"></span>
               <span className="text-lg font-semibold text-purple3 font-spacemono">Adobe Illustrator CC</span>
             </div>
             <div className="rounded-xl bg-purple1/80 p-4 flex items-center gap-3 shadow-md">
@@ -266,150 +309,150 @@ export default function HomePage() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" ref={sectionRefs.about} className="w-full max-w-4xl px-4 py-16 flex flex-col md:flex-row items-center gap-10 z-10 relative">
+      <section id="about" ref={sectionRefs.about} className="w-full max-w-4xl px-6 py-20 flex flex-col md:flex-row items-center gap-10 z-10 relative">
         <div className="flex-shrink-0">
           <Image src={mePaintingImage} alt="Retrato de Naia" width={260} height={340} className="rounded-2xl object-cover shadow-xl" />
         </div>
         <div>
           <h2 className="text-4xl font-styleScript font-inter text-purple1 mb-4">Sobre mim</h2>
-          <p className="text-lg text-white mb-2 italic">Naia é uma artista visual que explora a condição humana. O seu trabalho é eclético e simbólico, misturando semi-realismo e abstracionismo para apresentar narrativas que procuram conectar e motivar.<br />"A arte é como eu expresso o que está na minha mente quando as palavras falham."</p>
-          <p className="text-base text-purple1 mt-6">O meu nome é Naia, sou uma artista autodidata, nascida e criada em Moçambique, e atualmente baseada em Portugal. Desde sempre fui atraída pelo lápis e pelo papel, seja para tentar desenhar a minha boneca favorita ou para rabiscar nas paredes. À medida que cresci, segui o caminho da arte tradicional e pratiquei-a até sentir a necessidade de tomar as minhas próprias liberdades com o meu trabalho, ter ideias e conseguir colocá-las no papel sem problemas. Até hoje, o meu ambiente ainda é um grande fator contribuinte para a arte que crio, mas atualmente os meus meios são acrílico sobre tela e arte digital. Tenho grande interesse e inspiração nas obras do Renascimento e do movimento abstracionista, por isso, certamente encontrará uma semelhança disso no meu trabalho. Sinto a necessidade de misturar os dois. Nesta busca, o meu trabalho pode tomar rumos inesperados, mas não menos frutíferos. O aspeto da narrativa na arte é algo que está sempre muito presente no meu trabalho, seja ficcional ou não, e a história não termina com a atração principal da obra; a história é enriquecida por detalhes simbólicos que amplificam a narrativa e ajudam a transmitir a mensagem. O meu trabalho é motivacional e introspectivo e, com a ajuda de cores vibrantes e uma mistura de estilos, espero cumprir o objetivo de evocar emoção no meu público.</p>
+          <p className="text-lg text-neutral-700 mb-2 italic">Naia é uma artista visual que explora a condição humana. O seu trabalho é eclético e simbólico, misturando semi-realismo e abstracionismo para apresentar narrativas que procuram conectar e motivar.<br />"A arte é como eu expresso o que está na minha mente quando as palavras falham."</p>
+          <p className="text-base text-purple1 mt-6">O meu nome é Naia, nascida e criada em Moçambique, e atualmente baseada em Portugal. Desde sempre fui atraída pelo lápis e pelo papel, seja para tentar desenhar a minha boneca favorita ou para rabiscar nas paredes. À medida que cresci, segui o caminho da arte tradicional e pratiquei-a até sentir a necessidade de tomar as minhas próprias liberdades com o meu trabalho, ter ideias e conseguir colocá-las no papel sem problemas. Até hoje, o meu ambiente ainda é um grande fator contribuinte para a arte que crio, mas atualmente os meus meios são acrílico sobre tela e arte digital. Tenho grande interesse e inspiração nas obras do Renascimento e do movimento abstracionista, por isso, certamente encontrará uma semelhança disso no meu trabalho. Sinto a necessidade de misturar os dois. Nesta busca, o meu trabalho pode tomar rumos inesperados, mas não menos frutíferos. O aspeto da narrativa na arte é algo que está sempre muito presente no meu trabalho, seja ficcional ou não, e a história não termina com a atração principal da obra; a história é enriquecida por detalhes simbólicos que amplificam a narrativa e ajudam a transmitir a mensagem. O meu trabalho é motivacional e introspectivo e, com a ajuda de cores vibrantes e uma mistura de estilos, espero cumprir o objetivo de evocar emoção no meu público.</p>
         </div>
       </section>
 
       {/* Commissioned Works Section */}
-      <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="commissioned" ref={sectionRefs.commissioned} className="w-full max-w-5xl px-6 py-20 z-10 relative">
         <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Comissões</h2>
         <p className="text-base text-purple1 mb-8">Artes para capa que materializam histórias. Cada trabalho é meticulosamente criado para traduzir a essência e a visão do projeto.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center">
-            <Image src={hocusPocusImage} alt="Hocus Pocus The Guy" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={hocusPocusImage} alt="Hocus Pocus The Guy" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Hocus Pocus</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={sinestesiaTheGuyImage} alt="Sinestesia The Guy" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={sinestesiaTheGuyImage} alt="Sinestesia The Guy" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Sinestesia</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={bossCunaCoverartImage} alt="Boss Cuna" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={bossCunaCoverartImage} alt="Boss Cuna" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Segredos de um Poeta</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={potestadeFinalImage} alt="Potestade" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={potestadeFinalImage} alt="Potestade" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Potestade</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={lazuliJhayImage} alt="Lazuli Jhay" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={lazuliJhayImage} alt="Lazuli Jhay" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Lazuli</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={teen177Image} alt="Teen 17" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={teen177Image} alt="Teen 17" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Teen 17</span>
           </div>
         </div>
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="portfolio" ref={sectionRefs.portfolio} className="w-full max-w-5xl px-6 py-20 z-10 relative">
         <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Portfólio de Telas</h2>
-        <p className="text-base text-white mb-8">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center">
-            <Image src={karinganaImage} alt="Karingana wa karingana" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+        <p className="text-base text-black mb-8">Coleção de pinturas originais em acrílico e obras de técnica mista que exploram a condição humana, combinando semi-realismo e abstracionismo.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 w-full">
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={karinganaImage} alt="Karingana wa karingana" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" priority />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Karingana wa karingana / Era uma vez (2025)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 70x50cm</span>
-            <span className="text-xs text-neutral-100">Esta obra foca-se em representar a identidade africana e a cultura africana. Com o uso de cores vibrantes e figuras excêntricas explorei o quão vasto este tema é, tentando trazer ao de cima o coração disto tudo.</span>
+            <span className="text-xs text-black">Acrílico em tela - 70x50cm</span>
+            <span className="text-xs text-black">Esta obra foca-se em representar a identidade africana e a cultura africana. Com o uso de cores vibrantes e figuras excêntricas explorei o quão vasto este tema é, tentando trazer ao de cima o coração disto tudo.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={theDisconnectImage} alt="A desconexão" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={theDisconnectImage} alt="A desconexão" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">A desconexão / The disconnect (2024)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm </span>
-            <span className="text-xs text-neutral-100">Neste conjunto de quadros explorei a desconexão entre as pessoas em comunidade. O porquê de não perpetuarmos um ciclo de amor mas sim quase sempre um ciclo de ódio.</span>
+            <span className="text-xs text-black">Acrílico em tela - 16x20cm </span>
+            <span className="text-xs text-black">Neste conjunto de quadros explorei a desconexão entre as pessoas em comunidade. O porquê de não perpetuarmos um ciclo de amor mas sim quase sempre um ciclo de ódio.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2025)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 40x50cm</span>
-            <span className="text-xs text-neutral-100">Este quadro desvenda um diálogo íntimo com o eu. A dança entre o azul e o amarelo não é apenas uma escolha cromática, mas a linguagem que uso para explorar as dualidades e a essência da minha própria existência.</span>
+            <span className="text-xs text-black">Acrílico em tela - 40x50cm</span>
+            <span className="text-xs text-black">Este quadro desvenda um diálogo íntimo com o eu. A dança entre o azul e o amarelo não é apenas uma escolha cromática, mas a linguagem que uso para explorar as dualidades e a essência da minha própria existência.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2021)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 50x50cm</span>
-            <span className="text-xs text-neutral-100">Nesta obra exploro a conexão com a ancestralidade e a essência do ser. As texturas orgânicas e os contrastes visuais convidam a uma profunda reflexão sobre o que nos une e nos diferencia.</span>
+            <span className="text-xs text-black">Acrílico em tela - 50x50cm</span>
+            <span className="text-xs text-black">Nesta obra exploro a conexão com a ancestralidade e a essência do ser. As texturas orgânicas e os contrastes visuais convidam a uma profunda reflexão sobre o que nos une e nos diferencia.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Ecos da mente / Echoes of the mind (2024)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 50x70cm</span>
-            <span className="text-xs text-neutral-100">Esta é a minha tentativa de traduzir o fluxo de pensamentos e sensações num código visual. Cada traço e símbolo representa uma ideia ou emoção, construindo um mapa abstrato da minha própria mente. Uma janela para o subconsciente, convidando o observador a decifrar os seus próprios ecos.</span>
+            <span className="text-xs text-black">Acrílico em tela - 50x70cm</span>
+            <span className="text-xs text-black">Esta é a minha tentativa de traduzir o fluxo de pensamentos e sensações num código visual. Cada traço e símbolo representa uma ideia ou emoção, construindo um mapa abstrato da minha própria mente. Uma janela para o subconsciente, convidando o observador a decifrar os seus próprios ecos.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon (2022)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 30x36cm</span>
-            <span className="text-xs text-neutral-100">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
+            <span className="text-xs text-black">Acrílico em tela - 30x36cm</span>
+            <span className="text-xs text-black">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1 (2024)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
+            <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2 (2024)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 32x40cm</span>
+            <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it? (2022)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm</span>
+            <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">33.3 (2022)</span>
-            <span className="text-xs text-neutral-100">Acrílico em tela - 16x20cm</span>
-            <span className="text-xs text-neutral-100">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
+            <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
+            <span className="text-xs text-black">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
           </div>
         </div>
       </section>
 
       {/* Other Works Section */}
-      <section id="other" ref={sectionRefs.other} className="w-full max-w-5xl px-4 py-16 z-10 relative">
+      <section id="other" ref={sectionRefs.other} className="w-full max-w-5xl px-6 py-20 z-10 relative">
         <h2 className="text-4xl font-styleScript font-inter text-pink mb-8">Outros Trabalhos</h2>
         <p className="text-base text-purple1 mb-8">Projetos pessoais e trabalhos de arte digital que exploram diferentes temas, técnicas e expressões criativas para além do trabalho por encomenda.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center">
-            <Image src={lacosEternosImage} alt="Laços eternos" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={lacosEternosImage} alt="Laços eternos" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Laços eternos / Eternal bonds (2023)</span>
-            <span className="text-xs text-neutral-100">Arte digital</span>
-            <span className="text-xs text-neutral-400">Pintura digital inspirada no poema intitulado "Silogismos" de Ana Luísa Amaral. Explorei o sentimento de amor maternal, a vontade de passar uma eternidade uma com a outra.</span>
+            <span className="text-xs text-black">Arte digital</span>
+            <span className="text-xs text-neutral-700">Pintura digital inspirada no poema intitulado "Silogismos" de Ana Luísa Amaral. Explorei o sentimento de amor maternal, a vontade de passar uma eternidade uma com a outra.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={breakingOutImage} alt="O despertar" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={breakingOutImage} alt="O despertar" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">O despertar / Breaking out (2024)</span>
-            <span className="text-xs text-neutral-100">Arte digital</span>
-            <span className="text-xs text-neutral-400">É um desafio ser você mesmo numa sociedade que ainda não o/a compreende, mas a sua autenticidade é certamente contagiosa e inspiradora, e, com o tempo, você inspirará mudança neles também.</span>
+            <span className="text-xs text-black">Arte digital</span>
+            <span className="text-xs text-neutral-700">É um desafio ser você mesmo numa sociedade que ainda não o/a compreende, mas a sua autenticidade é certamente contagiosa e inspiradora, e, com o tempo, você inspirará mudança neles também.</span>
           </div>
-          <div className="flex flex-col items-center">
-            <Image src={amorFatiImage} alt="Amor fati" width={320} height={320} className="rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
+          <div className="flex flex-col items-center w-full max-w-sm mx-auto">
+            <Image src={amorFatiImage} alt="Amor fati" width={320} height={320} className="w-full h-auto rounded-xl object-cover shadow-lg hover:scale-105 transition-transform duration-200" />
             <span className="mt-2 text-purple1 font-spacemono text-sm italic">Amor fati (2024)</span>
-            <span className="text-xs text-neutral-100">Arte digital</span>
-            <span className="text-xs text-neutral-400">Obra baseada na crença com raízes estoicas que defende que Abraçar o emaranhado da existência com todo o coração.</span>
+            <span className="text-xs text-black">Arte digital</span>
+            <span className="text-xs text-neutral-700">Obra baseada na crença com raízes estoicas que defende que Abraçar o emaranhado da existência com todo o coração.</span>
           </div>
         </div>
       </section>
 
       {/* Prints Section */}
       <section id="prints" ref={sectionRefs.prints} className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
-        <h2 className="text-4xl font-styleScript font-inter text-peach mb-8">Compre Prints</h2>
+        <h2 className="text-4xl font-styleScript font-inter text-magenta mb-8">Compre Prints</h2>
         <p className="text-base text-purple1 mb-6">Traga a arte da Naia para o seu espaço. Impressões de alta qualidade de pinturas originais e obras de arte digital, disponíveis através do nosso parceiro de confiança.</p>
-        <a href="https://www.finemoz.co.mz/pt-pt/search?q=naia&options%5Bprefix%5D=last" target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border-2 border-peach px-8 py-3 text-peach hover:bg-peach hover:text-purple3 transition-colors font-bold text-lg">Comprar na FineMoz</a>
+        <a href="https://www.finemoz.co.mz/pt-pt/search?q=naia&options%5Bprefix%5D=last" target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border-2 border-magenta px-8 py-3 text-magenta hover:bg-magenta hover:text-purple3 transition-colors font-bold text-lg">Comprar na FineMoz</a>
       </section>
 
       {/* Contact Section (with form) */}
       <section id="contact" ref={sectionRefs.contact} className="w-full max-w-3xl px-4 py-16 z-10 relative text-center">
-        <h2 className="text-3xl font-bold text-white mb-8">Interessado em trabalhar comigo?</h2>
+        <h2 className="text-3xl font-bold text-neutral-700 mb-8">Interessado em trabalhar comigo?</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center max-w-lg mx-auto mb-8">
           <input
             id="email"
