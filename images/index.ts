@@ -20,6 +20,9 @@ import metamorfose1Url from './paintings/MetaMORFOSE-1-2024.jpg';
 import metamorfose2Url from './paintings/metamorfose-2-2024.jpg';
 import canYouSeeItUrl from './paintings/can-you-see-it-2021.jpg';
 import treeTresTresUrl from './paintings/333-2022.jpg';
+import arquiteturaUtopicaUrl from './paintings/arquitetura-utopica-2025.jpg';
+import raizesUrl from './paintings/raizes-2025.jpg';
+import sabedoriaEConjuntoUrl from './paintings/sabedoria-e-conjunto-2025.jpg';
 
 export const karinganaImage = karinganaUrl;
 export const theDisconnectImage = theDisconnectUrl;
@@ -31,6 +34,9 @@ export const metamorfose1Image = metamorfose1Url;
 export const metamorfose2Image = metamorfose2Url;
 export const canYouSeeItImage = canYouSeeItUrl;
 export const treeTresTresImage = treeTresTresUrl;
+export const arquiteturaUtopicaImage = arquiteturaUtopicaUrl;
+export const raizesImage = raizesUrl;
+export const sabedoriaEConjuntoImage = sabedoriaEConjuntoUrl;
 
 // Digital Art
 import lacosEternosUrl from './digital-art/Lacos-eternos-Naia-2023.png';

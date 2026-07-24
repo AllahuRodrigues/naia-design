@@ -19,6 +19,9 @@ import {
   metamorfose2Image,
   canYouSeeItImage,
   treeTresTresImage,
+  arquiteturaUtopicaImage,
+  raizesImage,
+  sabedoriaEConjuntoImage,
   // Commissioned
   hocusPocusImage,
   sinestesiaTheGuyImage,
@@ -438,6 +441,24 @@ export default function HomePage() {
             <span className="mt-2 text-pink font-spacemono text-sm italic">33.3 (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
             <span className="text-xs text-black">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
+          </div>
+          <div className="flex flex-col items-center w-full">
+            <Image src={arquiteturaUtopicaImage} alt="Arquitetura utópica" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Arquitetura utópica (2025)</span>
+            <span className="text-xs text-black">Acrílico em tela - 60x80cm</span>
+            <span className="text-xs text-black">Sob a aparência sólida do que construímos, escondem-se fissuras, desejos e possibilidades. Aqui, o sonho é alicerce, e o futuro é a matéria com que se constroem novas esperanças.</span>
+          </div>
+          <div className="flex flex-col items-center w-full">
+            <Image src={sabedoriaEConjuntoImage} alt="Sabedoria é... I e II (Conjunto)" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Sabedoria é... I e II (Conjunto) (2025)</span>
+            <span className="text-xs text-black">Acrílico em tela - 60x60cm (cada)</span>
+            <span className="text-xs text-black">O milagre silencioso de crescer juntos. Das raízes que se entrelaçam sob a terra, dos troncos que se amparam no sopro do vento. Um bosque de gestos e cores onde cada ser vive porque o outro existe.</span>
+          </div>
+          <div className="flex flex-col items-center w-full">
+            <Image src={raizesImage} alt="Raízes" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
+            <span className="mt-2 text-pink font-spacemono text-sm italic">Raízes (2025)</span>
+            <span className="text-xs text-black">Acrílico em tela - 60x80cm</span>
+            <span className="text-xs text-black">Um encontro entre o que fomos e o que nos tornamos. Um corpo que carrega os traços dos antepassados, mas caminha com a linguagem da modernidade. O que recebemos não é peso, mas impulso.</span>
           </div>
         </div>
       </section>
