@@ -35,6 +35,7 @@ import {
   amorFatiImage,
 } from "../images";
 import { scroller } from 'react-scroll';
+import ShopButton from './components/ShopButton';
 
 const flyingButtons = [
   { text: 'PRINTS', color: 'border-purple1 text-purple1 bg-transparent shadow-lg' },
@@ -390,75 +391,88 @@ export default function HomePage() {
             <span className="mt-2 text-pink font-spacemono text-sm italic">Karingana wa karingana / Era uma vez (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 70x50cm</span>
             <span className="text-xs text-black">Esta obra foca-se em representar a identidade africana e a cultura africana. Com o uso de cores vibrantes e figuras excêntricas explorei o quão vasto este tema é, tentando trazer ao de cima o coração disto tudo.</span>
+            <ShopButton paintingId="karingana-wa-karingana-2025" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={theDisconnectImage} alt="A desconexão" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">A desconexão / The disconnect (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm </span>
             <span className="text-xs text-black">Neste conjunto de quadros explorei a desconexão entre as pessoas em comunidade. O porquê de não perpetuarmos um ciclo de amor mas sim quase sempre um ciclo de ódio.</span>
+            <ShopButton paintingId="the-disconnect-2024" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={quadroNaoTitulado2025Image} alt="Quadro não-titulado 2025" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 40x50cm</span>
             <span className="text-xs text-black">Este quadro desvenda um diálogo íntimo com o eu. A dança entre o azul e o amarelo não é apenas uma escolha cromática, mas a linguagem que uso para explorar as dualidades e a essência da minha própria existência.</span>
+            <ShopButton paintingId="quadro-nao-titulado-2025" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={quadroNaoTitulado2021Image} alt="Quadro não-titulado 2021" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Quadro não-titulado / Untitled (2021)</span>
             <span className="text-xs text-black">Acrílico em tela - 50x50cm</span>
             <span className="text-xs text-black">Nesta obra exploro a conexão com a ancestralidade e a essência do ser. As texturas orgânicas e os contrastes visuais convidam a uma profunda reflexão sobre o que nos une e nos diferencia.</span>
+            <ShopButton paintingId="quadro-nao-titulado-2021" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={ecosDaMenteImage} alt="Ecos da mente" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Ecos da mente / Echoes of the mind (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 50x70cm</span>
             <span className="text-xs text-black">Esta é a minha tentativa de traduzir o fluxo de pensamentos e sensações num código visual. Cada traço e símbolo representa uma ideia ou emoção, construindo um mapa abstrato da minha própria mente. Uma janela para o subconsciente, convidando o observador a decifrar os seus próprios ecos.</span>
+            <ShopButton paintingId="ecos-da-mente-2024" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={therapySessionImage} alt="Uma sessão terapêutica com Poseidon" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Uma sessão terapêutica com Poseidon / A therapy session with Poseidon (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 30x36cm</span>
             <span className="text-xs text-black">A imensidão azul representa o vasto oceano da nossa psique, onde figuras flutuantes se libertam e encontram um espaço de cura. É um convite à introspeção, a lidar com as marés internas e a encontrar serenidade nas águas da própria alma.</span>
+            <ShopButton paintingId="a-therapy-session-poseidon-2022" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={metamorfose1Image} alt="Metamorfose" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 1 / Metamorphosis (set) Part 1 (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
+            <ShopButton paintingId="metamorfose-1-2024" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={metamorfose2Image} alt="Metamorfose" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Metamorfose (conjunto) Parte 2 / Metamorphosis (set) Part 2 (2024)</span>
             <span className="text-xs text-black">Acrílico em tela - 32x40cm</span>
+            <ShopButton paintingId="metamorfose-2-2024" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={canYouSeeItImage} alt="Consegues vê-lo?" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Consegues vê-lo? / Can you see it? (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
+            <ShopButton paintingId="can-you-see-it-2021" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={treeTresTresImage} alt="33.3" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">33.3 (2022)</span>
             <span className="text-xs text-black">Acrílico em tela - 16x20cm</span>
             <span className="text-xs text-black">Uma representação visual do verso 3 do capítulo 33 do livro de Jeremias.</span>
+            <ShopButton paintingId="333-2022" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={arquiteturaUtopicaImage} alt="Arquitetura utópica" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Arquitetura utópica (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 60x80cm</span>
             <span className="text-xs text-black">Sob a aparência sólida do que construímos, escondem-se fissuras, desejos e possibilidades. Aqui, o sonho é alicerce, e o futuro é a matéria com que se constroem novas esperanças.</span>
+            <ShopButton paintingId="arquitetura-utopica-2025" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={sabedoriaEConjuntoImage} alt="Sabedoria é... I e II (Conjunto)" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Sabedoria é... I e II (Conjunto) (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 60x60cm (cada)</span>
             <span className="text-xs text-black">O milagre silencioso de crescer juntos. Das raízes que se entrelaçam sob a terra, dos troncos que se amparam no sopro do vento. Um bosque de gestos e cores onde cada ser vive porque o outro existe.</span>
+            <ShopButton paintingId="sabedoria-e-conjunto-2025" />
           </div>
           <div className="flex flex-col items-center w-full">
             <Image src={raizesImage} alt="Raízes" width={320} height={400} className="w-full max-w-sm mx-auto h-auto min-h-[300px] max-h-[500px] rounded-xl object-contain shadow-lg hover:scale-105 transition-transform duration-200 bg-purple3/10" />
             <span className="mt-2 text-pink font-spacemono text-sm italic">Raízes (2025)</span>
             <span className="text-xs text-black">Acrílico em tela - 60x80cm</span>
             <span className="text-xs text-black">Um encontro entre o que fomos e o que nos tornamos. Um corpo que carrega os traços dos antepassados, mas caminha com a linguagem da modernidade. O que recebemos não é peso, mas impulso.</span>
+            <ShopButton paintingId="raizes-2025" />
           </div>
         </div>
       </section>
